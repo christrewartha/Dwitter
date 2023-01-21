@@ -24,6 +24,7 @@ def profile(request, pk):
 
 def dashboard(request):
     form = DweetForm(request.POST or None)
+    followed_dweets = []
     if request.method == "POST":
         if form.is_valid():
             dweet = form.save(commit=False)
@@ -31,9 +32,10 @@ def dashboard(request):
             dweet.save()
             return redirect("dwitter:dashboard")
 
-    followed_dweets = Dweet.objects.filter(
-        user__profile__in=request.user.profile.follows.all()
-    ).order_by("-created_at")
+    if request.user.is_authenticated:
+        followed_dweets = Dweet.objects.filter(
+            user__profile__in=request.user.profile.follows.all()
+        ).order_by("-created_at")
 
     return render(
         request,
