@@ -71,6 +71,20 @@
                 </button>
             </a>
         </div>
+        <div class="block">
+            <a href="{% url 'dwitter:register' %}">
+                <button class="button is-dark is-outlined is-fullwidth">
+                    Register
+                </button>
+            </a>
+        </div>
+        <div class="block">
+            <a href="{% url 'password_reset' %}">
+                <button class="button is-dark is-outlined is-fullwidth">
+                    Reset password
+                </button>
+            </a>
+        </div>
     {% endif %}
 </div>
 
